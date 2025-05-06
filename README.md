@@ -1,11 +1,11 @@
-# The ICT Vault - Exam Portal
+# The ICT Test Vault
 
 A web-based exam portal dashboard for managing and accessing term-wise examination resources.
 
 ## Features
 
 - 2x2 grid layout displaying Terms 1-4
-- Each term contains mid-term and final exam sections
+- Each term contains Mid-Term and final exam sections
 - PDF preview functionality for exam papers
 - Grade-wise organization (Grades 1-10)
 - Cover page access for each exam type
