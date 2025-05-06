@@ -1,4 +1,4 @@
-# The ICT Test Vault
+# The ICT Exam Portal
 
 A web-based exam portal dashboard for managing and accessing term-wise examination resources.
 
