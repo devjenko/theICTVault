@@ -6,651 +6,665 @@
     <title>The ICT Vault - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <style>
-        body {
-            background-color: #f3f4f6;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
+                    }
+                },
+                fontFamily: {
+                    'body': [
+                        'Inter', 
+                        'ui-sans-serif', 
+                        'system-ui'
+                    ],
+                    'sans': [
+                        'Inter', 
+                        'ui-sans-serif', 
+                        'system-ui'
+                    ]
+                }
+            }
         }
-
-        .term-card {
-            background-color: white;
-            border: 1px solid #e5e7eb;
-        }
-
-        /* Button Styles */
-        .midterm-btn {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            color: white;
-        }
-        .midterm-btn:hover {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-        }
-
-        .final-btn {
-            background: linear-gradient(135deg, #4f46e5, #4338ca);
-            color: white;
-        }
-        .final-btn:hover {
-            background: linear-gradient(135deg, #4338ca, #3730a3);
-        }
-
-        /* Header Styles */
-        .nav-gradient {
-            background: linear-gradient(to right, #2563eb, #3b82f6);
-        }
-
-        .section-border {
-            border-color: #e5e7eb;
-        }
-
-        .section-text {
-            color: #1f2937;
-        }
-
-        /* Icon colors */
-        .fa-file-alt {
-            color: #3b82f6 !important;
-        }
-
-        /* Welcome text color */
-        .text-teal {
-            color: #3b82f6;
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav-gradient shadow-sm">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <h1 class="text-xl font-bold text-white">The ICT Vault</h1>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Navbar -->
+    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center justify-start rtl:justify-end">
+                    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                        <span class="sr-only">Open sidebar</span>
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+                        </svg>
+                    </button>
+                    <a href="#" class="flex ms-2 md:me-24">
+                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">The ICT Vault</span>
+                    </a>
+                </div>
+                
+                <!-- Welcome Message (Centered) -->
+                <div class="flex-1 flex justify-center">
+                    <div id="welcomeMessage" class="flex items-center px-4 py-2 bg-white border border-primary-200 shadow-sm rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                        <i class="fas fa-user-circle text-primary-500 dark:text-primary-400 mr-2"></i>
+                        <div class="flex items-center">
+                            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium mr-1">Welcome,</p>
+                            <p class="text-base text-gray-800 dark:text-white font-semibold teacher-name"></p>
+                        </div>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <span class="text-white opacity-90">Welcome, Teacher</span>
-                    <button id="logoutBtn" class="text-white opacity-80 hover:opacity-100 transition-opacity duration-200">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
+                
+                <div class="flex items-center">
+                    <div class="flex items-center ms-3">
+                        <button id="logoutBtn" class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Sidebar -->
+    <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+        <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800 flex flex-col">
+            <div class="flex-grow">
+                <div class="px-4 py-3 mb-4 bg-gray-50 rounded-lg dark:bg-gray-700">
+                    <h5 class="text-base font-semibold text-gray-900 dark:text-white">Exam Resources</h5>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Navigate available terms</p>
+                </div>
+                
+                <ul class="space-y-2 font-medium">
+                    <li>
+                        <a href="#term1" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <i class="w-5 h-5 text-teal-500 fa-solid fa-calendar-day"></i>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Term 1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#term2" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <i class="w-5 h-5 text-blue-500 fa-solid fa-calendar-day"></i>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Term 2</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#term3" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <i class="w-5 h-5 text-cyan-500 fa-solid fa-calendar-day"></i>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Term 3</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#term4" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <i class="w-5 h-5 text-violet-500 fa-solid fa-calendar-day"></i>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Term 4</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Help & About Sections -->
+            <div class="mt-auto space-y-4">
+                <div class="px-3 py-2 mt-4">
+                    <h6 class="text-sm font-medium uppercase text-gray-400 dark:text-gray-500">Help & Support</h6>
+                    <ul class="mt-2 space-y-1">
+                        <li>
+                            <a href="mailto:brandonrichard.jenkins@ggas.school" class="flex items-center p-2 text-sm text-gray-700 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-4 h-4 text-gray-500 fa-solid fa-envelope"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Contact IT Support</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="px-3 py-3 mt-2 border-t border-gray-200 dark:border-gray-700">
+                    <p class="text-xs text-left text-gray-500 dark:text-gray-400">
+                        The ICT Vault v1.0<br>
+                        © 2025 Brandon Jenkins
+                    </p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <!-- Welcome Section -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold section-text border-b-2 section-border pb-2">Resources</h2>
-            <p class="mt-1 text-teal">Select a term to access your resources</p>
-        </div>
+    <div class="p-4 sm:ml-64 mt-14">
+        <div class="p-4">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Teacher Resources Portal</h2>
+                <p class="mt-1 text-gray-600 dark:text-gray-400">Select a term from the sidebar to view exam resources</p>
+            </div>
 
-        <!-- Term Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Term 1 -->
-            <div class="term-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold section-text border-b section-border pb-2 mb-4">Term 1</h3>
+            <!-- Term Grid -->
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Term 1 -->
+                <div id="term1" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Term 1</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Mid-term Section -->
+                        <!-- Mid-Term Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium" style="color: var(--teal)">Mid-term Exams</h4>
+                            <h4 class="text-lg font-medium text-teal-600 dark:text-teal-500">Mid-Term Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-teal-600 dark:text-teal-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 1 Mid Exam/T1 Mid-Term Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="alert('Term 1 Mid-Term Exam cover page is not yet available')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G1/G1 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <!-- Grade 2 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G2/G2 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <!-- Grade 3 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G3/G3 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <!-- Grade 4 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G4/G4 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <!-- Grade 5 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G5/G5 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <!-- Grade 6 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G6/G6 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <!-- Grade 7 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G7/G7 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <!-- Grade 8 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G8/G8 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <!-- Grade 9 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G9/G9 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <!-- Grade 10 -->
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Mid Exam/G10/G10 T1 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 1 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 2 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 3 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 4 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 5 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 6 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 1 Mid-Term Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Final Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium section-text">Final Exams</h4>
+                            <h4 class="text-lg font-medium text-emerald-600 dark:text-emerald-500">Final Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--deep-teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-emerald-600 dark:text-emerald-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 1 Final Exam/T1 Final Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="printPDF('exams/Term 1 Final Exam/G1/T1 Final Exam Cover Page.pdf')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G1/G1 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <!-- Grade 2 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G2/G2 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <!-- Grade 3 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G3/G3 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <!-- Grade 4 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G4/G4 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <!-- Grade 5 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G5/G5 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <!-- Grade 6 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G6/G6 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <!-- Grade 7 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G7/G7 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <!-- Grade 8 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G8/G8 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <!-- Grade 9 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G9/G9 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <!-- Grade 10 -->
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 1 Final Exam/G10/G10 T1 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G1/G1 Exam T1 Final Question Paper.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G2/G2 Exam T1 Final Question Paper.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G3/Grade 3 T1 Final Exam Questions.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G4/Grade 4 T1 Final Exam Questions.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G5/Grade 5 T1 Final Exam Questions.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G6/Grade 6 T1 Final Exam Questions.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G7/Grade 7 T1 Final Exam Questions.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G8/Grade 8 T1 Final Exam Questions.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G9/Grade 9 T1 Final Exam Question.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/Term 1 Final Exam/G10/Grade 10 T1 Final Exam Questions.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Term 2 -->
-            <div class="term-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold section-text border-b section-border pb-2 mb-4">Term 2</h3>
+                <!-- Term 2 -->
+                <div id="term2" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Term 2</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Mid-term Section -->
+                        <!-- Mid-Term Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium" style="color: var(--teal)">Mid-term Exams</h4>
+                            <h4 class="text-lg font-medium text-blue-600 dark:text-blue-500">Mid-Term Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-blue-600 dark:text-blue-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 2 Mid Exam/T2 Mid-Term Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="alert('Term 2 Mid-Term Exam cover page is not yet available')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G1/G1 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G2/G2 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G3/G3 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G4/G4 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G5/G5 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G6/G6 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G7/G7 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G8/G8 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G9/G9 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Mid Exam/G10/G10 T2 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 1 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 2 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 3 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 4 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 5 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 6 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Mid-Term Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Final Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium section-text">Final Exams</h4>
+                            <h4 class="text-lg font-medium text-indigo-600 dark:text-indigo-500">Final Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--deep-teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-indigo-600 dark:text-indigo-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 2 Final Exam/T2 Final Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="alert('Term 2 Final Exam cover page is not yet available')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G1/G1 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G2/G2 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G3/G3 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G4/G4 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G5/G5 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G6/G6 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G7/G7 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G8/G8 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G9/G9 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 2 Final Exam/G10/G10 T2 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 1 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 2 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 3 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 4 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 5 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 6 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 2 Final Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Term 3 -->
-            <div class="term-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold section-text border-b section-border pb-2 mb-4">Term 3</h3>
+                <!-- Term 3 -->
+                <div id="term3" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Term 3</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Mid-term Section -->
+                        <!-- Mid-Term Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium" style="color: var(--teal)">Mid-term Exams</h4>
+                            <h4 class="text-lg font-medium text-cyan-600 dark:text-cyan-500">Mid-Term Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-cyan-600 dark:text-cyan-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 3 Mid Exam/T3 Mid-Term Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="alert('Term 3 Mid-Term Exam cover page is not yet available')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G1/G1 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G2/G2 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G3/G3 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G4/G4 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G5/G5 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G6/G6 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G7/G7 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G8/G8 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G9/G9 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Mid Exam/G10/G10 T3 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 1 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 2 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 3 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 4 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 5 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 6 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Mid-Term Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Final Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium section-text">Final Exams</h4>
+                            <h4 class="text-lg font-medium text-sky-600 dark:text-sky-500">Final Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--deep-teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-sky-600 dark:text-sky-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 3 Final Exam/T3 Final Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="alert('Term 3 Final Exam cover page is not yet available')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G1/G1 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G2/G2 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G3/G3 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G4/G4 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G5/G5 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G6/G6 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G7/G7 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G8/G8 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G9/G9 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 3 Final Exam/G10/G10 T3 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 1 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 2 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 3 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 4 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 5 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 6 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 3 Final Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Term 4 -->
-            <div class="term-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold section-text border-b section-border pb-2 mb-4">Term 4</h3>
+                <!-- Term 4 -->
+                <div id="term4" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Term 4</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Mid-term Section -->
+                        <!-- Mid-Term Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium" style="color: var(--teal)">Mid-term Exams</h4>
+                            <h4 class="text-lg font-medium text-violet-600 dark:text-violet-500">Mid-Term Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-violet-600 dark:text-violet-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 4 Mid Exam/T4 Mid-Term Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="printPDF('exams/T4 Mid Exams/T4 Mid-Term Exam Cover.pdf')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G1/G1 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G2/G2 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G3/G3 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G4/G4 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G5/G5 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G6/G6 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G7/G7 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G8/G8 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G9/G9 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <button class="print-btn midterm-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Mid Exam/G10/G10 T4 Mid-Term Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G1/T4 Mid Project G1.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G2/T4 Mid Project G2.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G3/G3 T4 Mid Exam.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G4/G4 T4 Mid Exam.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G5/ICT T4 Mid Exam G5.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G6/T4 Mid Exam G6.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G7/G7 T4 Mid-Term Exam.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G8/G8 T4 Mid-Term Exam.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G9/T4 Mid-Term Exam G9.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="printPDF('exams/T4 Mid Exams/G10/G10 T4 Mid-Term Exam.pdf')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Final Section -->
                         <div class="space-y-4">
-                            <h4 class="text-md font-medium section-text">Final Exams</h4>
+                            <h4 class="text-lg font-medium text-purple-600 dark:text-purple-500">Final Exams</h4>
                             
                             <!-- Cover Page -->
-                            <div class="bg-white rounded-lg p-4 border section-border">
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2" style="color: var(--deep-teal)"></i>
-                                    <span class="font-medium section-text">Cover Page</span>
+                                    <i class="fas fa-file-alt mr-2 text-purple-600 dark:text-purple-500"></i>
+                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
                                 </div>
-                                <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                        data-pdf="Term 4 Final Exam/T4 Final Exam Cover.pdf">
+                                <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        onclick="alert('Term 4 Final Exam cover page is not yet available')">
                                     <i class="fas fa-print mr-1"></i> Print Cover
                                 </button>
                             </div>
 
                             <!-- Grade Buttons -->
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 border section-border">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G1/G1 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 1
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G2/G2 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 2
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G3/G3 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 3
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G4/G4 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 4
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G5/G5 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 5
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G6/G6 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 6
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G7/G7 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 7
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G8/G8 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 8
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G9/G9 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 9
-                                        </button>
-                                        <button class="print-btn final-btn w-full px-4 py-2 rounded-lg text-sm"
-                                                data-pdf="Term 4 Final Exam/G10/G10 T4 Final Exam.pdf">
-                                            <i class="fas fa-print mr-1"></i> Grade 10
-                                        </button>
-                                    </div>
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 1 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 1
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 2 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 2
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 3 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 3
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 4 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 4
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 5 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 5
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 6 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 6
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Term 4 Final Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -660,22 +674,66 @@
         </div>
     </div>
 
-    <!-- PDF Preview Modal -->
-    <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white w-11/12 h-5/6 rounded-lg shadow-xl flex flex-col">
-            <div class="flex justify-between items-center p-4 border-b section-border">
-                <h3 class="text-lg font-semibold section-text">PDF Preview</h3>
-                <button id="closeModal" class="hover:text-deep-teal transition-colors duration-200"
-                        style="color: var(--teal)">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div id="pdfViewer" class="flex-1 overflow-auto p-4">
-                <!-- PDF will be rendered here -->
-            </div>
-        </div>
-    </div>
+    <!-- Hidden iframe container for PDF printing -->
+    <div id="printContainer" style="display: none;"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    <script>
+        // Function to handle PDF printing
+        function printPDF(pdfPath) {
+            console.log('Attempting to print PDF:', pdfPath);
+            
+            // Clear previous iframes
+            const printContainer = document.getElementById('printContainer');
+            printContainer.innerHTML = '';
+            
+            // Create an iframe for the PDF
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = pdfPath;
+            
+            // Add loading indicator to body
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50', 'z-50');
+            loadingIndicator.innerHTML = `
+                <div class="animate-pulse text-white text-xl">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> Loading PDF...
+                </div>
+            `;
+            document.body.appendChild(loadingIndicator);
+            
+            // Handle iframe loading
+            iframe.onload = function() {
+                // Remove loading indicator
+                document.body.removeChild(loadingIndicator);
+                
+                try {
+                    // Try to access iframe content (same-origin required)
+                    const iframeWindow = iframe.contentWindow;
+                    
+                    // Wait a bit for the PDF to fully render
+                    setTimeout(() => {
+                        // Focus window and print
+                        iframeWindow.focus();
+                        iframeWindow.print();
+                    }, 1000);
+                } catch (error) {
+                    console.error('Error accessing iframe content:', error);
+                    alert('Error loading PDF. Please make sure the file exists and try again.');
+                }
+            };
+            
+            // Handle errors
+            iframe.onerror = function() {
+                document.body.removeChild(loadingIndicator);
+                console.error('Error loading PDF in iframe');
+                alert('Error loading PDF. Please make sure the file exists and try again.');
+            };
+            
+            // Add iframe to container
+            printContainer.appendChild(iframe);
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html> 
