@@ -51,20 +51,17 @@
                 
                 <!-- Welcome Message (Centered) -->
                 <div class="flex-1 hidden sm:flex justify-center">
-                    <div id="welcomeMessage" class="flex items-center px-4 py-2 bg-white border border-primary-200 shadow-sm rounded-lg dark:bg-gray-700 dark:border-gray-600">
-                        <i class="fas fa-user-circle text-primary-500 dark:text-primary-400 mr-2"></i>
-                        <div class="flex items-center">
-                            <p class="text-sm text-gray-500 dark:text-gray-400 font-medium mr-1">Welcome,</p>
-                            <p class="text-base text-gray-800 dark:text-white font-semibold teacher-name"></p>
-                        </div>
+                    <div id="welcomeMessage" class="flex items-center px-5 py-2 bg-gray-50 border border-gray-200 shadow-sm rounded-md dark:bg-gray-800 dark:border-gray-700">
+                        <i class="fas fa-id-badge text-primary-500 dark:text-primary-400 mr-2"></i>
+                        <span class="text-sm text-gray-700 dark:text-gray-300">Welcome, <span class="font-semibold text-gray-900 dark:text-white teacher-name"></span></span>
                     </div>
                 </div>
                 
                 <div class="flex items-center">
                     <div class="flex items-center ms-3">
                         <button id="logoutBtn" class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-gray-300 transition-colors duration-200 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </button>
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
                     </div>
                 </div>
             </div>
@@ -80,32 +77,67 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400">Navigate available terms</p>
                 </div>
                 
-                <ul class="space-y-2 font-medium">
-                    <li>
-                        <a href="#term1" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <i class="w-5 h-5 text-teal-500 fa-solid fa-calendar-day"></i>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Term 1</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#term2" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <i class="w-5 h-5 text-blue-500 fa-solid fa-calendar-day"></i>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Term 2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#term3" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <i class="w-5 h-5 text-cyan-500 fa-solid fa-calendar-day"></i>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Term 3</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#term4" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <i class="w-5 h-5 text-violet-500 fa-solid fa-calendar-day"></i>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Term 4</span>
-                        </a>
-                    </li>
-                </ul>
+                <!-- ICT Exams Section -->
+                <div class="mb-4">
+                    <h6 class="px-4 py-2 text-sm font-medium uppercase text-primary-600 dark:text-primary-400">ICT Exams</h6>
+                    <ul class="space-y-2 font-medium">
+                        <li>
+                            <a href="#term1" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-teal-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#term2" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-blue-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 2</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#term3" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-cyan-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#term4" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-violet-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 4</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Art Exams Section -->
+                <div>
+                    <h6 class="px-4 py-2 text-sm font-medium uppercase text-primary-600 dark:text-primary-400">Art Exams</h6>
+                    <ul class="space-y-2 font-medium">
+                        <li>
+                            <a href="#art-term1" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-orange-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#art-term2" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-yellow-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 2</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#art-term3" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-lime-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#art-term4" class="term-link flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <i class="w-5 h-5 text-pink-500 fa-solid fa-calendar-day"></i>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Term 4</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             
             <!-- Help & About Sections -->
@@ -135,15 +167,15 @@
     <!-- Main Content -->
     <div class="p-4 sm:ml-64 mt-14">
         <div class="p-4">
-            <!-- Welcome Section -->
+        <!-- Welcome Section -->
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Teacher Resources Portal</h2>
                 <p class="mt-1 text-gray-600 dark:text-gray-400">Select a term from the sidebar to view exam resources</p>
-            </div>
+        </div>
 
-            <!-- Term Grid -->
+        <!-- Term Grid -->
             <div class="grid grid-cols-1 gap-8">
-                <!-- Term 1 -->
+            <!-- Term 1 -->
                 <div id="term1" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Term 1</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -151,18 +183,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-teal-600 dark:text-teal-500">Mid-Term Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-teal-600 dark:text-teal-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="alert('Term 1 Mid-Term Exam cover page is not yet available')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -214,18 +234,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-emerald-600 dark:text-emerald-500">Final Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-emerald-600 dark:text-emerald-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:focus:ring-emerald-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="printPDF('exams/Term 1 Final Exam/G1/T1 Final Exam Cover Page.pdf')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -283,18 +291,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-blue-600 dark:text-blue-500">Mid-Term Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-blue-600 dark:text-blue-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="alert('Term 2 Mid-Term Exam cover page is not yet available')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -346,18 +342,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-indigo-600 dark:text-indigo-500">Final Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-indigo-600 dark:text-indigo-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="alert('Term 2 Final Exam cover page is not yet available')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -415,18 +399,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-cyan-600 dark:text-cyan-500">Mid-Term Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-cyan-600 dark:text-cyan-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="alert('Term 3 Mid-Term Exam cover page is not yet available')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -478,18 +450,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-sky-600 dark:text-sky-500">Final Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-sky-600 dark:text-sky-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-sky-500 via-sky-600 to-sky-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="alert('Term 3 Final Exam cover page is not yet available')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -547,18 +507,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-violet-600 dark:text-violet-500">Mid-Term Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-violet-600 dark:text-violet-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-violet-300 dark:focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="printPDF('exams/T4 Mid Exams/T4 Mid-Term Exam Cover.pdf')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -610,18 +558,6 @@
                         <div class="space-y-4">
                             <h4 class="text-lg font-medium text-purple-600 dark:text-purple-500">Final Exams</h4>
                             
-                            <!-- Cover Page -->
-                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-file-alt mr-2 text-purple-600 dark:text-purple-500"></i>
-                                    <span class="font-medium text-gray-900 dark:text-white">Cover Page</span>
-                                </div>
-                                <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                                        onclick="alert('Term 4 Final Exam cover page is not yet available')">
-                                    <i class="fas fa-print mr-1"></i> Print Cover
-                                </button>
-                            </div>
-
                             <!-- Grade Buttons -->
                             <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                 <div class="grid grid-cols-1 gap-2">
@@ -663,6 +599,246 @@
                                     </button>
                                     <button class="w-full text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                             onclick="alert('Term 4 Final Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Art Term 1 -->
+                <div id="art-term1" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Art - Term 1</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Mid-Term Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-orange-600 dark:text-orange-500">Mid-Term Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Mid-Term Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Mid-Term Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Mid-Term Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Mid-Term Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Final Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-amber-600 dark:text-amber-500">Final Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Final Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Final Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Final Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 1 Final Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Art Term 2 -->
+                <div id="art-term2" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Art - Term 2</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Mid-Term Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-yellow-600 dark:text-yellow-500">Mid-Term Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Mid-Term Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Mid-Term Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Mid-Term Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Mid-Term Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Final Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-lime-600 dark:text-lime-500">Final Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Final Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Final Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Final Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 2 Final Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Art Term 3 -->
+                <div id="art-term3" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Art - Term 3</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Mid-Term Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-lime-600 dark:text-lime-500">Mid-Term Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Mid-Term Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Mid-Term Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Mid-Term Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-lime-500 via-lime-600 to-lime-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Mid-Term Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Final Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-green-600 dark:text-green-500">Final Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Final Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Final Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Final Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 3 Final Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Art Term 4 -->
+                <div id="art-term4" class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">Art - Term 4</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Mid-Term Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-pink-600 dark:text-pink-500">Mid-Term Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Mid-Term Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Mid-Term Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Mid-Term Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Mid-Term Exam for Grade 10 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 10
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Final Section -->
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-medium text-rose-600 dark:text-rose-500">Final Exams</h4>
+                            
+                            <!-- Grade Buttons -->
+                            <div class="p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                                <div class="grid grid-cols-1 gap-2">
+                                    <button class="w-full text-white bg-gradient-to-r from-rose-500 via-rose-600 to-rose-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-rose-300 dark:focus:ring-rose-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Final Exam for Grade 7 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 7
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-rose-500 via-rose-600 to-rose-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-rose-300 dark:focus:ring-rose-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Final Exam for Grade 8 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 8
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-rose-500 via-rose-600 to-rose-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-rose-300 dark:focus:ring-rose-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Final Exam for Grade 9 is not yet available')">
+                                        <i class="fas fa-print mr-1"></i> Grade 9
+                                    </button>
+                                    <button class="w-full text-white bg-gradient-to-r from-rose-500 via-rose-600 to-rose-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-rose-300 dark:focus:ring-rose-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            onclick="alert('Art Term 4 Final Exam for Grade 10 is not yet available')">
                                         <i class="fas fa-print mr-1"></i> Grade 10
                                     </button>
                                 </div>
