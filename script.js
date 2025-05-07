@@ -476,4 +476,44 @@ function printPDF(pdfPath) {
     
     // Set source to trigger loading
     printFrame.src = pdfPath;
-} 
+}
+
+// Function to get file path based on term, type, grade, and document type
+function getFilePath(term, examType, grade, docType) {
+    // Get folder name based on term and exam type
+    let folderName = '';
+    
+    if (term === 3 && examType === 'Mid') {
+        folderName = 'Term 3 Mid-Term Exams [done]';
+    } else if (term === 3 && examType === 'Final') {
+        folderName = 'Term 3 Final Exams [done]';
+    } else if (term === 4 && examType === 'Mid') {
+        folderName = 'Term 4 Mid-Term Exams [done]';
+    } else {
+        console.error('Invalid term or exam type');
+        return '';
+    }
+    
+    // Base path
+    const basePath = `ICT Exams/${folderName}/G${grade} - done`;
+    
+    // Document type-specific subfolder and filename
+    let subFolder = '';
+    let fileName = '';
+    
+    if (docType === 'Exam') {
+        subFolder = 'Exam';
+        fileName = `Grade ${grade} Term ${term} ${examType}-Term Exam.pdf`;
+    } else if (docType === 'Review') {
+        subFolder = 'Review';
+        fileName = `Grade ${grade} Term ${term} ${examType}-Term Review.pdf`;
+    } else if (docType === 'Answer') {
+        subFolder = 'Answer Key';
+        fileName = `Grade ${grade} Term ${term} ${examType}-Term Answer Key.pdf`;
+    } else {
+        console.error('Invalid document type');
+        return '';
+    }
+    
+    return `${basePath}/${subFolder}/${fileName}`;
+}
