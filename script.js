@@ -1,3 +1,84 @@
+// New dark mode toggle functionality
+function setupDarkModeToggle() {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    
+    // Check if elements exist
+    if (!themeToggleBtn || !themeToggleDarkIcon || !themeToggleLightIcon) {
+        console.error('Theme toggle elements not found');
+        return;
+    }
+    
+    console.log('Setting up dark mode toggle');
+    
+    // Center both icons within the button
+    themeToggleDarkIcon.classList.add('m-auto');
+    themeToggleLightIcon.classList.add('m-auto');
+    
+    // Set initial state
+    if (localStorage.getItem('color-theme') === 'dark' || 
+        (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeToggleLightIcon.classList.remove('hidden');
+        themeToggleDarkIcon.classList.add('hidden');
+    } else {
+        document.documentElement.classList.remove('dark');
+        themeToggleLightIcon.classList.add('hidden');
+        themeToggleDarkIcon.classList.remove('hidden');
+    }
+    
+    // Add click event
+    themeToggleBtn.addEventListener('click', function() {
+        console.log('Theme toggle clicked');
+        
+        // Toggle icons
+        themeToggleDarkIcon.classList.toggle('hidden');
+        themeToggleLightIcon.classList.toggle('hidden');
+        
+        // Toggle dark class on html element
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+            console.log('Switching to light mode');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+            console.log('Switching to dark mode');
+        }
+    });
+}
+
+// Execute theme setup when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    setupDarkModeToggle();
+    
+    // Check if user is logged in
+    const teacherName = localStorage.getItem('teacherName');
+    if (!teacherName && window.location.pathname.includes('dashboard')) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    // Display welcome message
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    if (welcomeMessage) {
+        const teacherNameElement = welcomeMessage.querySelector('.teacher-name');
+        if (teacherNameElement) {
+            teacherNameElement.textContent = teacherName;
+        }
+    }
+
+    // Add event listener for logout button
+    const logoutButton = document.getElementById('logoutBtn');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            localStorage.removeItem('teacherName');
+            window.location.href = 'index.html';
+        });
+    }
+});
+
 // Check if we're on the login page
 const loginForm = document.getElementById('loginForm');
 console.log('Login form found:', loginForm); // Debug log
@@ -359,51 +440,6 @@ function loadAndPrintPDF(path) {
     document.body.appendChild(printFrame);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if user is logged in
-    const teacherName = localStorage.getItem('teacherName');
-    if (!teacherName) {
-        window.location.href = 'index.html';
-        return;
-    }
-
-    // Display welcome message
-    const welcomeMessage = document.getElementById('welcomeMessage');
-    if (welcomeMessage) {
-        const teacherNameElement = welcomeMessage.querySelector('.teacher-name');
-        if (teacherNameElement) {
-            teacherNameElement.textContent = teacherName;
-        }
-    }
-
-    // Add event listeners for print buttons
-    const printButtons = document.querySelectorAll('.print-btn');
-    printButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const pdfPath = this.getAttribute('data-pdf');
-            console.log('Button clicked with data-pdf:', pdfPath);
-            const [term, examType, grade] = pdfPath.split('/');
-            console.log('Parsed values:', { term, examType, grade });
-            const fullPath = getPDFPath(term, examType, grade);
-            console.log('Full path:', fullPath);
-            if (fullPath) {
-                loadAndPrintPDF(fullPath);
-            } else {
-                alert('PDF file not found. Please check if the file exists.');
-            }
-        });
-    });
-
-    // Add event listener for logout button
-    const logoutButton = document.getElementById('logoutBtn');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function() {
-            localStorage.removeItem('teacherName');
-            window.location.href = 'index.html';
-        });
-    }
-});
-
 // Function to directly trigger printing without showing a modal
 function printPDF(pdfPath) {
     console.log('Printing PDF:', pdfPath);
@@ -440,32 +476,4 @@ function printPDF(pdfPath) {
     
     // Set source to trigger loading
     printFrame.src = pdfPath;
-}
-
-// Add event listeners when the DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if user is logged in
-    const teacherName = localStorage.getItem('teacherName');
-    if (!teacherName) {
-        window.location.href = 'index.html';
-        return;
-    }
-
-    // Display welcome message
-    const welcomeMessage = document.getElementById('welcomeMessage');
-    if (welcomeMessage) {
-        const teacherNameElement = welcomeMessage.querySelector('.teacher-name');
-        if (teacherNameElement) {
-            teacherNameElement.textContent = teacherName;
-        }
-    }
-
-    // Add event listener for logout button
-    const logoutButton = document.getElementById('logoutBtn');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function() {
-            localStorage.removeItem('teacherName');
-            window.location.href = 'index.html';
-        });
-    }
-}); 
+} 
