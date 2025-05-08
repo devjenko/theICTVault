@@ -491,6 +491,7 @@ function getFilePath(term, examType, grade, docType) {
         folderName = 'Term 4 Mid-Term Exams [done]';
     } else {
         console.error('Invalid term or exam type');
+        alert('Error: The requested exam is not available. Please check back later.');
         return '';
     }
     
@@ -506,12 +507,22 @@ function getFilePath(term, examType, grade, docType) {
         fileName = `Grade ${grade} Term ${term} ${examType}-Term Exam.pdf`;
     } else if (docType === 'Review') {
         subFolder = 'Review';
-        fileName = `Grade ${grade} Term ${term} ${examType}-Term Review.pdf`;
+        
+        // Handle different naming patterns for Review files
+        if (term === 3 && examType === 'Final') {
+            fileName = `G${grade} T3 Final Review Sheet.pdf`;
+        } else if (term === 4 && examType === 'Mid' && grade === 9) {
+            fileName = `G9 T4 Mid-Term Review.pdf`;
+        } else {
+            fileName = `Grade ${grade} Term ${term} ${examType}-Term Review.pdf`;
+        }
     } else if (docType === 'Answer') {
-        subFolder = 'Answer Key';
-        fileName = `Grade ${grade} Term ${term} ${examType}-Term Answer Key.pdf`;
+        // Answer Key files are not available yet
+        alert(`The Answer Key for Grade ${grade} Term ${term} ${examType}-Term Exam is not available yet. Please check back later.`);
+        return '';
     } else {
         console.error('Invalid document type');
+        alert('Error: Invalid document type selected.');
         return '';
     }
     

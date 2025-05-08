@@ -1,60 +1,60 @@
 # The ICT Exam Portal
 
-A web-based exam portal dashboard for managing and accessing term-wise examination resources.
-
-## Features
-
-- 2x2 grid layout displaying Terms 1-4
-- Each term contains Mid-Term and final exam sections
-- PDF preview functionality for exam papers
-- Grade-wise organization (Grades 1-10)
-- Cover page access for each exam type
-- Responsive design
-- Modern UI with intuitive navigation
-
-## Technology Stack
-
-- HTML5
-- Tailwind CSS
-- JavaScript
-- PDF.js for PDF preview
-- Font Awesome for icons
+A web-based system for teachers to access and print ICT and Art exam resources.
 
 ## Project Structure
 
 ```
-exam-portal/
-├── dashboard.html      # Main dashboard interface
-├── script.js          # JavaScript functionality
-├── .gitignore        # Git ignore rules
-└── README.md         # Project documentation
+ict-exam-portal/
+├── public/              # Public files served by the web server
+│   ├── assets/          # Static assets
+│   │   ├── css/         # CSS stylesheets
+│   │   ├── js/          # JavaScript files
+│   │   ├── images/      # Image files
+│   │   └── fonts/       # Font files (if any)
+│   ├── ICT Exams/       # Exam resources
+│   │   ├── Term 3 Mid-Term Exams [done]/    # Term 3 mid-term exams
+│   │   ├── Term 3 Final Exams [done]/       # Term 3 final exams
+│   │   └── Term 4 Mid-Term Exams [done]/    # Term 4 mid-term exams
+│   ├── index.html       # Login page
+│   ├── dashboard.html   # Main dashboard
+│   └── contact-qr.html  # Contact QR code page
+├── node_modules/        # Node.js dependencies
+├── package.json         # Project configuration
+├── package-lock.json    # Dependency lock file
+└── README.md            # Project documentation
 ```
 
-## Setup
+## Features
 
-1. Clone the repository:
-```bash
-git clone https://github.com/your-username/exam-portal.git
-```
+- Secure teacher login system
+- Organized access to exam resources by term and grade
+- Dark mode toggle
+- Responsive design for all devices
+- Direct printing of PDF resources
 
-2. Open `dashboard.html` in a web browser to view the portal.
+## Grade Structure
 
-## Usage
+Each grade folder contains:
+- Exams: The actual exam papers
+- Reviews: Study materials and review documents
+- Answer Keys: Solutions and marking guides
 
-- Navigate through different terms using the 2x2 grid layout
-- Access mid-term and final exam resources for each term
-- Preview PDF files before printing
-- Print exam papers directly from the interface
-- Use grade buttons to access grade-specific exam papers
+## How to Use
 
-## Contributing
+1. Access the login page and enter your credentials
+2. Navigate the dashboard using the term selector in the sidebar
+3. Choose a grade and exam type (Mid-term or Final)
+4. Select to view/print the Review, Exam, or Answer Key
+5. Use the dark mode toggle for better readability in different lighting conditions
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## Technologies Used
 
-## License
+- HTML5
+- CSS3 with Tailwind CSS
+- JavaScript (ES6+)
+- PDF.js for PDF handling
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+## Contact
+
+For technical support, use the QR code available in the dashboard. 
