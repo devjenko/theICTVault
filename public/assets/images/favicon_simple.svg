@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Graduation cap representing education/exams -->
+  <path d="M16,6 L3,12 L16,18 L29,12 Z" fill="#0F52BA" />
+  <path d="M8,13.5 L8,20 C8,22 16,26 16,26 C16,26 24,22 24,20 L24,13.5" stroke="#0F52BA" stroke-width="1.5" fill="none" />
+  <rect x="23" y="13.5" width="2" height="7" fill="#0F52BA" />
+  
+  <!-- Simple circuit board pattern to represent ICT -->
+  <line x1="12" y1="12" x2="20" y2="12" stroke="#FFFFFF" stroke-width="1" />
+  <line x1="16" y1="10" x2="16" y2="14" stroke="#FFFFFF" stroke-width="1" />
+  <circle cx="12" cy="12" r="1" fill="#FFFFFF" />
+  <circle cx="20" cy="12" r="1" fill="#FFFFFF" />
+  <circle cx="16" cy="10" r="1" fill="#FFFFFF" />
+  <circle cx="16" cy="14" r="1" fill="#FFFFFF" />
+</svg>
