@@ -480,23 +480,24 @@ function printPDF(pdfPath) {
 
 // Function to get file path based on term, type, grade, and document type
 function getFilePath(term, examType, grade, docType) {
-    // Get folder name based on term and exam type
-    let folderName = '';
+    // Check if the requested exam type exists for the term
+    const availableExams = {
+        1: ['Final'],           // Term 1 only has Final exams
+        2: ['Mid', 'Final'],    // Term 2 has both Mid and Final
+        3: ['Mid', 'Final'],    // Term 3 has both Mid and Final  
+        4: ['Mid', 'Final']     // Term 4 has both Mid and Final
+    };
     
-    if (term === 3 && examType === 'Mid') {
-        folderName = 'Term 3 Mid-Term Exams [done]';
-    } else if (term === 3 && examType === 'Final') {
-        folderName = 'Term 3 Final Exams [done]';
-    } else if (term === 4 && examType === 'Mid') {
-        folderName = 'Term 4 Mid-Term Exams [done]';
-    } else {
-        console.error('Invalid term or exam type');
-        alert('Error: The requested exam is not available. Please check back later.');
+    if (!availableExams[term] || !availableExams[term].includes(examType)) {
+        alert(`Term ${term} ${examType === 'Mid' ? 'Mid-Term' : 'Final'} Exams are not available. Please check back later.`);
         return '';
     }
     
+    // Get folder name based on term and exam type
+    const folderName = `Term ${term} ${examType === 'Mid' ? 'Mid-Term' : 'Final'} Exams`;
+    
     // Base path
-    const basePath = `ICT Exams/${folderName}/G${grade} - done`;
+    const basePath = `ICT Exams/${folderName}/G${grade}`;
     
     // Document type-specific subfolder and filename
     let subFolder = '';
@@ -504,24 +505,79 @@ function getFilePath(term, examType, grade, docType) {
     
     if (docType === 'Exam') {
         subFolder = 'Exam';
-        fileName = `Grade ${grade} Term ${term} ${examType}-Term Exam.pdf`;
+        
+        // Handle different naming patterns for exam files
+        if (term === 4 && examType === 'Final') {
+            // Term 4 Final has different patterns
+            if (grade === 1) {
+                fileName = `Term 4 Final Exam Grade 1.pdf`;
+            } else if (grade === 2) {
+                fileName = `G2 Term 4 Final Exam.pdf`;
+            } else if (grade === 4 || grade === 5) {
+                // Grades 4 and 5 use "Instructions" instead of "Exam"
+                fileName = `Grade ${grade} Term 4 Final Instructions.pdf`;
+            } else {
+                fileName = `G${grade} T4 Final Exam.pdf`;
+            }
+        } else {
+            // Standard naming pattern for other terms
+            fileName = `Grade ${grade} Term ${term} ${examType === 'Mid' ? 'Mid-Term' : 'Final'} Exam.pdf`;
+        }
     } else if (docType === 'Review') {
         subFolder = 'Review';
         
-        // Handle different naming patterns for Review files
-        if (term === 3 && examType === 'Final') {
-            fileName = `G${grade} T3 Final Review Sheet.pdf`;
-        } else if (term === 4 && examType === 'Mid' && grade === 9) {
-            fileName = `G9 T4 Mid-Term Review.pdf`;
-        } else {
-            fileName = `Grade ${grade} Term ${term} ${examType}-Term Review.pdf`;
+        // Handle different naming patterns for review files based on what I observed
+        if (term === 1 && examType === 'Final') {
+            // Term 1 Final has different patterns for different grades
+            if (grade === 1 || grade === 2) {
+                fileName = `Grade ${grade} Term 1 Final Review Sheet.pdf`;
+            } else if (grade === 4) {
+                fileName = `Grade 4 T1 Final Review.pdf`;
+            } else {
+                fileName = `G${grade} T1 Final Review.pdf`;
+            }
+        } else if (term === 2) {
+            // Term 2 uses different patterns for Grade 1 vs others
+            if (examType === 'Final' && grade === 1) {
+                fileName = `Grade 1 Term 2 Final Review.pdf`;
+            } else {
+                fileName = `G${grade} T2 ${examType === 'Mid' ? 'Mid' : 'Final'} Review.pdf`;
+            }
+        } else if (term === 3) {
+            // Term 3 uses different patterns for Mid vs Final
+            if (examType === 'Final') {
+                fileName = `G${grade} T3 Final Review Sheet.pdf`;
+            } else {
+                fileName = `Grade ${grade} Term 3 Mid-Term Review.pdf`;
+            }
+        } else if (term === 4) {
+            // Term 4 has very inconsistent naming patterns - need specific mappings
+            if (examType === 'Final') {
+                // Term 4 Final reviews have unique names for each grade
+                const term4FinalReviewMap = {
+                    1: 'T4 Final Review G1.pdf',
+                    2: 'G2 Term 4 Final Review Sheet.pdf',
+                    3: 'PowerPoint for Public Speaking ICT Review T4 Final.pdf',
+                    4: 'Grade 4 Term 4 Final Review.pdf',
+                    5: 'Grade 5 Term 4 Final Review.pdf',
+                    6: 'Grade 6 Term 4 Final Review.pdf',
+                    7: 'Grade 7 Term 4 Final Review.pdf',
+                    8: 'Review Activity Term 4 Final Grade 8.pdf',
+                    9: 'G9 T4 Final Review.pdf',
+                    10: 'Term 4 Final Exam Review G10.pdf'
+                };
+                fileName = term4FinalReviewMap[grade] || `Grade ${grade} Term 4 Final Review.pdf`;
+            } else {
+                // Term 4 Mid reviews use standard pattern
+                fileName = `Grade ${grade} Term 4 Mid-Term Review.pdf`;
+            }
         }
     } else if (docType === 'Answer') {
-        // Answer Key files are not available yet
-        alert(`The Answer Key for Grade ${grade} Term ${term} ${examType}-Term Exam is not available yet. Please check back later.`);
+        // Answer Key files are not available yet for most exams
+        alert(`The Answer Key for Grade ${grade} Term ${term} ${examType === 'Mid' ? 'Mid-Term' : 'Final'} Exam is not available yet. Please check back later.`);
         return '';
     } else {
-        console.error('Invalid document type');
+        console.error('Invalid document type:', docType);
         alert('Error: Invalid document type selected.');
         return '';
     }

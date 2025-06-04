@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The ICT Exam Portal - Dashboard</title>
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon_simple.svg">
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon_simple.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
@@ -1677,15 +1677,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 1</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 1 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 1, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 1 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 1, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 1 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 1, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1696,15 +1696,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 2</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 2 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 2, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 2 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 2, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 2 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 2, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1715,15 +1715,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 3</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 3 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 3, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 3 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 3, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 3 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 3, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1734,15 +1734,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 4</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 4 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 4, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 4 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 4, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 4 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 4, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1753,15 +1753,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 5</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 5 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 5, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 5 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 5, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 5 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 5, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1772,15 +1772,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 6</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 6 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 6, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 6 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 6, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 6 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 6, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1791,15 +1791,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 7</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 7 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 7, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 7 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 7, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 7 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 7, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1810,15 +1810,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 8</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 8 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 8, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 8 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 8, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 8 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 8, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1829,15 +1829,15 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 9</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 9 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 9, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 9 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 9, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
-                                                    onclick="alert('Term 4 Final Answer Key for Grade 9 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 9, 'Answer'))">
                                                 <i class="fas fa-key mr-1"></i> Answer Key
                                             </button>
                                         </div>
@@ -1848,11 +1848,11 @@
                                         <p class="font-medium mb-2 text-gray-700 dark:text-gray-300">Grade 10</p>
                                         <div class="flex rounded-lg overflow-hidden">
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-r border-purple-500"
-                                                    onclick="alert('Term 4 Final Review for Grade 10 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 10, 'Review'))">
                                                 <i class="fas fa-book mr-1"></i> Review
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center"
-                                                    onclick="alert('Term 4 Final Exam for Grade 10 is not yet available')">
+                                                    onclick="printPDF(getFilePath(4, 'Final', 10, 'Exam'))">
                                                 <i class="fas fa-file-alt mr-1"></i> Exam
                                             </button>
                                             <button class="flex-1 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium text-sm py-2.5 text-center border-l border-purple-500"
